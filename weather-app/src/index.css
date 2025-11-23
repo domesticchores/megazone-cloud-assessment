@@ -1,3 +1,23 @@
 @import "tailwindcss";
 @import 'material-symbols';
 @plugin 'tailwind-scrollbar';
+
+:root {
+  @apply text-neutral-300;
+}
+
+.bg-primary {
+  @apply bg-stone-800;
+}
+
+.bg-widget {
+  @apply bg-zinc-700;
+}
+
+.bg-header {
+  @apply bg-zinc-700;
+}
+
+.custom-scroll {
+  @apply scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-stone-900;
+}
