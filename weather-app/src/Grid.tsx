@@ -1,5 +1,6 @@
 import CurrentWeather from "./components/CurrentWeather"
 import Humidity from "./components/Humidity"
+import TomorrowPredicted from "./components/TomorrowPredicted"
 import UVIndex from "./components/UVIndex"
 import WeatherBox from "./components/WeatherBox"
 import WindDirection from "./components/WindDirection"
@@ -36,23 +37,9 @@ function Grid() {
             <div className="bg-widget h-full rounded-4xl p-2 col-span-3 flex">
                 <WeatherBox weatherData={mockWeatherBoxData}/>
             </div>
+
             <div className="bg-widget h-full rounded-4xl py-4 px-12 col-span-3 flex">
-                <div className="w-1/2 text-center flex">
-                    <div className="w-fit m-auto">
-                        <h2 className="text-2xl font-semibold">Tomorrow's Forecast</h2>
-                        <p className="my-auto text-xl text-center w-full">Patchy rain nearby.</p>
-                    </div>
-                </div>
-                <div className="w-1/2">
-                    <div className="w-fit m-auto">
-                        <span className="material-symbols-rounded text-[6.5em]! md:text-[12em]! lg:text-[7em]! flex m-auto">rainy</span>
-                    </div>
-                    <div className="flex w-fit text-2xl font-bold gap-x-1 items-center m-auto -mt-2">
-                        <h2 className="">43°</h2>
-                        <h2 className="text-3xl">/</h2>
-                        <h2 className="">29°</h2>
-                    </div>
-                </div>
+                <TomorrowPredicted weatherData={mockWeatherBoxData}></TomorrowPredicted>
             </div>
         </div>
     </div>
