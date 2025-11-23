@@ -7,8 +7,8 @@ import WindDirection from "./components/WindDirection"
 
 function Grid() {
 
-  const mockWeatherBoxData = {name:"Paris",code:'1003','high':'43','low':'29'};
-  const mockCurrentWeatherData = {name:"Rochester",code:'1003','temp':'40','feelslike':'35'};
+  const mockWeatherBoxData = {name:"Paris",code:'1003','high':'43','low':'29','symbol':'F'};
+  const mockCurrentWeatherData = {name:"Rochester",code:'1003','temp':'40','feelslike':'35','symbol':'F'};
 
   return (
     // main container
@@ -34,8 +34,15 @@ function Grid() {
             <Humidity/>
             <UVIndex/>
             
-            <div className="bg-widget h-full rounded-4xl p-2 col-span-3 flex">
-                <WeatherBox weatherData={mockWeatherBoxData}/>
+            <div className="bg-widget h-full rounded-4xl p-2 col-span-3">
+                <h2 className="text-2xl font-semibold text-center mb-2">Today's Forecast</h2>
+                <div className="flex">
+                    <WeatherBox weatherData={mockWeatherBoxData}/>
+                    <WeatherBox weatherData={mockWeatherBoxData}/>
+                    <WeatherBox weatherData={mockWeatherBoxData}/>
+                    <WeatherBox weatherData={mockWeatherBoxData}/>
+                    <WeatherBox weatherData={mockWeatherBoxData}/>
+                </div>
             </div>
 
             <div className="bg-widget h-full rounded-4xl py-4 px-12 col-span-3 flex">
@@ -46,4 +53,4 @@ function Grid() {
   )
 }
 
-export default Grid
+export default Grid;

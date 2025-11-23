@@ -18,8 +18,8 @@ function CurrentWeather({className, weatherData}: WeatherProps) {
             <h1 className="text-3xl">{codeData.status}.</h1>
         </div>
         <div className="w-full h-3/12 text-center">
-            <h1 className="text-8xl font-bold">{weatherData.feelslike}°</h1>
-            <p className="text-2xl">Actual: {weatherData.temp}°</p>
+            <h1 className="text-8xl font-bold">{weatherData.feelslike}°{weatherData.symbol}</h1>
+            <p className="text-2xl">Actual: {weatherData.temp}°{weatherData.symbol}</p>
         </div>
     </>
 }
