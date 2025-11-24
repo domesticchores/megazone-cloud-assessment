@@ -61,7 +61,6 @@ export function getWeatherIcon(
   code: number,
   isDay?: boolean
 ): string {
-    console.log()
   const entry = weatherCodes[code];
   if (!entry) return "help";
 

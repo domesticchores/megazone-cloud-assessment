@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, use } from "react"
 import CurrentWeather from "./components/CurrentWeather"
 import Humidity from "./components/Humidity"
 import TomorrowPredicted from "./components/TomorrowPredicted"
@@ -8,6 +8,7 @@ import WindDirection from "./components/WindDirection"
 import { getBulkData, getCurrentData } from "./lib/weatherApi"
 
 import mockData from "./assets/mockForecast.json"
+import FavoriteBar from "./components/FavoriteBar"
 
 function Grid() {
 
@@ -20,8 +21,9 @@ function Grid() {
   const [data, setData] = useState<any>(null);
   const [favData, setFavData] = useState<any>(null);
 
-  const city = "Rochester, New York";
-  const favorites = ["San Antonio, Texas","Avenel, New Jersey","Ann Arbor, Michigan"]
+  const [city, setCity] = useState<string>("Rochester, New York");
+  const [favorites, setFavorites] = useState<string[]>(["San Antonio, Texas","Avenel, New Jersey","Ann Arbor, Michigan","Washington, District of Columbia, US"]);
+
   const symbol = 'f';
 
   useEffect(() => {
@@ -33,12 +35,12 @@ function Grid() {
 
   useEffect(() => {
     getBulkData(favorites).then((res) => {
-        console.log(res);
-        setFavData(res);
+        console.log(res.bulk);
+        setFavData(res.bulk);
     });
-  }, [city]);
+  }, [favorites]);
 
-  if (!data) return <div className="bg-primary w-screen h-screen pt-12"></div>
+  if (!data || !favData) return <div className="bg-primary w-screen h-screen pt-12"></div>
 
     const formattedCurrentData = {
         name: data.location.name,
@@ -69,17 +71,22 @@ function Grid() {
         {/* grid container, with horizontal padding */}
         <div className="grid w-screen h-full grid-rows-3 md:grid-cols-6 sm:grid-cols-1 gap-4 max-w-7xl mx-auto py-8 px-4">
             <div className="bg-widget h-full rounded-4xl col-span-1 row-span-2 md:row-span-3 overflow-hidden">
-                <div className="w-full h-full p-8 overflow-y-scroll custom-scroll">
-                    <h1 className="text-3xl font-semibold justify-start text-center mb-4">Favorites</h1>
-                    
-                    <WeatherBox symbol={symbol} className="mb-8" weatherData={mockWeatherBoxData}></WeatherBox>
-                    <WeatherBox symbol={symbol} className="mb-8" weatherData={mockWeatherBoxData}></WeatherBox>
-                    <WeatherBox symbol={symbol} className="mb-8" weatherData={mockWeatherBoxData}></WeatherBox>
-                    <WeatherBox symbol={symbol} className="mb-8" weatherData={mockWeatherBoxData}></WeatherBox>
-                </div>
+                <FavoriteBar dataArr={favData} symbol={symbol}></FavoriteBar>
             </div>
 
-            <div className="bg-widget h-full rounded-4xl p-8 col-span-2 row-span-2 md:row-span-3">
+            <div className="bg-widget h-full rounded-4xl p-8 col-span-2 row-span-2 md:row-span-3 relative overflow-hidden">
+
+                <div className="absolute left-0 top-0 w-32 h-32 bg-orange-500 rounded-full -m-6 blur-[80px]"></div>
+                <div className="absolute left-0 top-0 w-24 h-24 bg-orange-500 -m-12 blur-2xl"></div>
+
+                <div className="absolute right-0 bottom-0 w-32 h-32 bg-orange-500 rounded-full -m-6 blur-[80px]"></div>
+                <div className="absolute right-0 bottom-0 w-24 h-24 bg-orange-500 -m-12 blur-2xl"></div>
+
+                <div className="absolute left-0 bottom-0 w-32 h-32 bg-blue-500 rounded-full -m-6 blur-[80px]"></div>
+                <div className="absolute left-0 bottom-0 w-24 h-24 bg-blue-500 -m-12 blur-2xl"></div>
+
+                <div className="absolute inset-0 border-4 w-full h-full saturate-110 rounded-4xl border-zinc-300/25"></div>
+                
                 <CurrentWeather weatherData={formattedCurrentData}></CurrentWeather>
             </div>
 

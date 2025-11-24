@@ -17,8 +17,6 @@ function WeatherBox({className, weatherData, symbol}: WeatherProps) {
             low: Math.round(weatherData["mintemp_"+symbol]),
     }
 
-    console.log(formattedWeatherData.is_day)
-
     let name = weatherData.name;
     if (weatherData.name.length == 16) {
         const cropped: number =  parseInt(weatherData.name.substring(11,13));
@@ -26,7 +24,7 @@ function WeatherBox({className, weatherData, symbol}: WeatherProps) {
     }
     return <>
         <div className={`m-auto text-center ${className || ''}`}>
-            <h2 className="text-md md:text-lg lg:text-xl font-bold mb-1">{name}</h2>
+            <h2 className="text-md md:text-md lg:text-xl font-bold mb-1">{name}</h2>
             <span className="material-symbols-rounded text-[1em]! md:text-[2em]! lg:text-[4em]! m-auto">{getWeatherIcon(formattedWeatherData.code, formattedWeatherData.is_day)}</span>
             <div className="flex w-fit text-md md:text-lg lg:text-2xl font-bold gap-x-1 items-center m-auto -mt-2">
                 {!Number.isNaN(formattedWeatherData.feelslike) && <>
