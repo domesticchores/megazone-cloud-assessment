@@ -10,29 +10,32 @@ function WeatherBox({className, weatherData, symbol}: WeatherProps) {
     const formattedWeatherData = {
             name: weatherData.name,
             code: weatherData.code || weatherData.condition.code,
+            is_day: weatherData.is_day,
             temp: Math.round(weatherData["temp_"+symbol]),
             feelslike: Math.round(weatherData["feelslike_"+symbol]),
-            high: weatherData.high,
-            low: weatherData.low
+            high: Math.round(weatherData["maxtemp_"+symbol]),
+            low: Math.round(weatherData["mintemp_"+symbol]),
     }
+
+    console.log(formattedWeatherData.is_day)
 
     let name = weatherData.name;
     if (weatherData.name.length == 16) {
         const cropped: number =  parseInt(weatherData.name.substring(11,13));
-        name = cropped <  12 ? cropped + "am" : (cropped % 12) + "pm"
+        name = cropped < 12 ? cropped + "am" : (cropped % 12 || 12) + "pm"
     }
     return <>
         <div className={`m-auto text-center ${className || ''}`}>
             <h2 className="text-md md:text-lg lg:text-xl font-bold mb-1">{name}</h2>
-            <span className="material-symbols-rounded text-[1em]! md:text-[2em]! lg:text-[4em]! m-auto">{getWeatherIcon(formattedWeatherData.code)}</span>
+            <span className="material-symbols-rounded text-[1em]! md:text-[2em]! lg:text-[4em]! m-auto">{getWeatherIcon(formattedWeatherData.code, formattedWeatherData.is_day)}</span>
             <div className="flex w-fit text-md md:text-lg lg:text-2xl font-bold gap-x-1 items-center m-auto -mt-2">
-                {formattedWeatherData.feelslike != undefined && <>
-                    <h2 className="">{formattedWeatherData.feelslike}°</h2>
+                {!Number.isNaN(formattedWeatherData.feelslike) && <>
+                    <h2 className="">{formattedWeatherData.feelslike || "?"}°</h2>
                 </>}
-                {formattedWeatherData.feelslike == undefined && <>
-                    <h2 className="">{formattedWeatherData.high}°</h2>
+                {Number.isNaN(formattedWeatherData.feelslike) && <>
+                    <h2 className="">{formattedWeatherData.high || "?"}°</h2>
                     <h2 className="">/</h2>
-                    <h2 className="">{formattedWeatherData.low}°</h2>
+                    <h2 className="">{formattedWeatherData.low || "?"}°</h2>
                 </>}
             </div>
         </div>

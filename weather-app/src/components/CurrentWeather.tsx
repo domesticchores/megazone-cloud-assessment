@@ -15,7 +15,7 @@ function CurrentWeather({className, weatherData}: WeatherProps) {
             <span className="material-symbols-rounded text-[6.5em]! md:text-[12em]! lg:text-[15em]! m-auto">{codeData.icon}</span>
         </div>
         <div className="w-full h-1/12 text-center mb-4">
-            <h1 className="text-3xl">{codeData.status}.</h1>
+            <h1 className="text-3xl">{codeData.status}</h1>
         </div>
         <div className="w-full h-3/12 text-center">
             <h1 className="text-8xl font-bold">{weatherData["feelslike_"+weatherData.symbol]}°{weatherData.symbol.toUpperCase()}</h1>

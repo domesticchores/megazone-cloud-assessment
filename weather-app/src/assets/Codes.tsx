@@ -59,22 +59,23 @@ export const weatherCodes: Record<number, WeatherCode> = {
 
 export function getWeatherIcon(
   code: number,
-  options?: { isNight?: boolean }
+  isDay?: boolean
 ): string {
+    console.log()
   const entry = weatherCodes[code];
   if (!entry) return "help";
 
-  return options?.isNight ? entry.iconNight : entry.iconDay;
+  return isDay || false ? entry.iconDay : entry.iconNight;
 }
 
 export function getWeatherData(
   code: number,
-  options?: { isNight?: boolean }
+  options?: { isDay?: boolean }
 ): {icon: string, status: string} {
   const entry = weatherCodes[code];
   if (!entry) return {icon:"help",status:"Unknown"};
 
-  const icon = options?.isNight ? entry.iconNight : entry.iconDay;
-  const status = options?.isNight ? entry.day : entry.night
+  const icon = options?.isDay ? entry.iconNight : entry.iconDay;
+  const status = options?.isDay ? entry.day : entry.night
   return {icon,status};
 }

@@ -5,7 +5,7 @@ import TomorrowPredicted from "./components/TomorrowPredicted"
 import UVIndex from "./components/UVIndex"
 import WeatherBox from "./components/WeatherBox"
 import WindDirection from "./components/WindDirection"
-import { getCurrentData } from "./lib/weatherApi"
+import { getBulkData, getCurrentData } from "./lib/weatherApi"
 
 import mockData from "./assets/mockForecast.json"
 
@@ -17,21 +17,33 @@ function Grid() {
   const mockHumidity = {percentage: 57}
   const mockWindDirection = {speed: 7.6, direction: "NW"}
 
-  const [data, setData] = useState<any>(mockData);
+  const [data, setData] = useState<any>(null);
+  const [favData, setFavData] = useState<any>(null);
 
   const city = "Rochester, New York";
+  const favorites = ["San Antonio, Texas","Avenel, New Jersey","Ann Arbor, Michigan"]
   const symbol = 'f';
 
   useEffect(() => {
     getCurrentData(city).then((res) => {
         console.log(res);
-        setData(res)
+        setData(res);
     });
   }, [city]);
+
+  useEffect(() => {
+    getBulkData(favorites).then((res) => {
+        console.log(res);
+        setFavData(res);
+    });
+  }, [city]);
+
+  if (!data) return <div className="bg-primary w-screen h-screen pt-12"></div>
 
     const formattedCurrentData = {
         name: data.location.name,
         code: data.current.condition.code,
+        is_day: data.current.is_day,
         temp_c: Math.round(data.current.temp_c),
         temp_f: Math.round(data.current.temp_f),
         feelslike_c: Math.round(data.current.feelslike_c),
@@ -41,10 +53,15 @@ function Grid() {
         direction: data.current.wind_dir,
         percentage: data.current.humidity,
         symbol: symbol,
-        forecast: data.forecast.forecastday[0].hour
+        forecast: data.forecast.forecastday[0].hour,
+        tomorrow: {
+            code: data.forecast.forecastday[1].day.condition.code,
+            maxtemp_c: data.forecast.forecastday[1].day.maxtemp_c,
+            maxtemp_f: data.forecast.forecastday[1].day.maxtemp_f,
+            mintemp_c: data.forecast.forecastday[1].day.mintemp_c,
+            mintemp_f: data.forecast.forecastday[1].day.mintemp_f,
+        }
     }
-
-    console.log(formattedCurrentData)
 
   return (
     // main container
@@ -73,14 +90,14 @@ function Grid() {
             <div className="bg-widget h-full rounded-4xl p-2 col-span-3">
                 <h2 className="text-2xl font-semibold text-center mb-2">Today's Forecast</h2>
                 <div className="flex">
-                    {[9,13,15,17,19].map(index => formattedCurrentData.forecast[index]).map((hour: any) => {
+                    {[8,12,16,18,20].map(index => formattedCurrentData.forecast[index]).map((hour: any) => {
                         return <WeatherBox symbol={symbol} key={hour.time} weatherData={{name: hour.time,...hour}}></WeatherBox>
                     })}
                 </div>
             </div>
 
             <div className="bg-widget h-full rounded-4xl py-4 px-12 col-span-3 flex">
-                <TomorrowPredicted weatherData={mockWeatherBoxData}></TomorrowPredicted>
+                <TomorrowPredicted weatherData={{name: formattedCurrentData.name,symbol:formattedCurrentData.symbol,...formattedCurrentData.tomorrow}}></TomorrowPredicted>
             </div>
         </div>
     </div>
