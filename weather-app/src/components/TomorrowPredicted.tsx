@@ -13,7 +13,7 @@ function TomorrowPredicted({className, weatherData}: WeatherProps) {
                 <p className="my-auto text-xl text-center w-full">Patchy rain nearby.</p>
             </div>
         </div>
-        <WeatherBox weatherData={weatherData}></WeatherBox>
+        <WeatherBox weatherData={weatherData} symbol={weatherData.symbol}></WeatherBox>
     </>
 }
 

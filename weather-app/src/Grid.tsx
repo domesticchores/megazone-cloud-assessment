@@ -7,6 +7,8 @@ import WeatherBox from "./components/WeatherBox"
 import WindDirection from "./components/WindDirection"
 import { getCurrentData } from "./lib/weatherApi"
 
+import mockData from "./assets/mockForecast.json"
+
 function Grid() {
 
   const mockWeatherBoxData = {name:"Paris",code:'1003','high':43,'low':29,'symbol':'F'};
@@ -15,41 +17,34 @@ function Grid() {
   const mockHumidity = {percentage: 57}
   const mockWindDirection = {speed: 7.6, direction: "NW"}
 
-  const [data, setData] = useState<any>(null);
+  const [data, setData] = useState<any>(mockData);
 
   const city = "Rochester, New York";
   const symbol = 'f';
 
   useEffect(() => {
     getCurrentData(city).then((res) => {
+        console.log(res);
         setData(res)
     });
-  }, []);
+  }, [city]);
 
-  console.log(data)
+    const formattedCurrentData = {
+        name: data.location.name,
+        code: data.current.condition.code,
+        temp_c: Math.round(data.current.temp_c),
+        temp_f: Math.round(data.current.temp_f),
+        feelslike_c: Math.round(data.current.feelslike_c),
+        feelslike_f: Math.round(data.current.feelslike_f),
+        uv: data.current.uv,
+        speed: Math.round(data.current.wind_mph),
+        direction: data.current.wind_dir,
+        percentage: data.current.humidity,
+        symbol: symbol,
+        forecast: data.forecast.forecastday[0].hour
+    }
 
-  let formattedCurrentData = {
-    ...mockCurrentWeatherData,
-    ...mockHumidity,
-    ...mockUV,
-    ...mockWindDirection
-  }
-
-   if (data != null) {
-        formattedCurrentData = {
-            name: data.location.name,
-            code: data.current.condition.code,
-            temp: Math.round(data.current["temp_"+symbol]),
-            feelslike: Math.round(data.current["feelslike_"+symbol]),
-            uv: data.current.uv,
-            speed: Math.round(data.current.wind_mph),
-            direction: data.current.wind_dir,
-            percentage: data.current.humidity,
-            symbol: symbol.toUpperCase()
-        }
-   }
-  
-  console.log(formattedCurrentData)
+    console.log(formattedCurrentData)
 
   return (
     // main container
@@ -60,10 +55,10 @@ function Grid() {
                 <div className="w-full h-full p-8 overflow-y-scroll custom-scroll">
                     <h1 className="text-3xl font-semibold justify-start text-center mb-4">Favorites</h1>
                     
-                    <WeatherBox className="mb-8" weatherData={mockWeatherBoxData}></WeatherBox>
-                    <WeatherBox className="mb-8" weatherData={mockWeatherBoxData}></WeatherBox>
-                    <WeatherBox className="mb-8" weatherData={mockWeatherBoxData}></WeatherBox>
-                    <WeatherBox className="mb-8" weatherData={mockWeatherBoxData}></WeatherBox>
+                    <WeatherBox symbol={symbol} className="mb-8" weatherData={mockWeatherBoxData}></WeatherBox>
+                    <WeatherBox symbol={symbol} className="mb-8" weatherData={mockWeatherBoxData}></WeatherBox>
+                    <WeatherBox symbol={symbol} className="mb-8" weatherData={mockWeatherBoxData}></WeatherBox>
+                    <WeatherBox symbol={symbol} className="mb-8" weatherData={mockWeatherBoxData}></WeatherBox>
                 </div>
             </div>
 
@@ -78,11 +73,9 @@ function Grid() {
             <div className="bg-widget h-full rounded-4xl p-2 col-span-3">
                 <h2 className="text-2xl font-semibold text-center mb-2">Today's Forecast</h2>
                 <div className="flex">
-                    <WeatherBox weatherData={mockWeatherBoxData}/>
-                    <WeatherBox weatherData={mockWeatherBoxData}/>
-                    <WeatherBox weatherData={mockWeatherBoxData}/>
-                    <WeatherBox weatherData={mockWeatherBoxData}/>
-                    <WeatherBox weatherData={mockWeatherBoxData}/>
+                    {[9,13,15,17,19].map(index => formattedCurrentData.forecast[index]).map((hour: any) => {
+                        return <WeatherBox symbol={symbol} key={hour.time} weatherData={{name: hour.time,...hour}}></WeatherBox>
+                    })}
                 </div>
             </div>
 
