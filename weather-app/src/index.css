@@ -21,3 +21,23 @@
 .custom-scroll {
   @apply scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-stone-900;
 }
+
+.gradient-sm-big {
+  @apply w-10 h-10 blur-2xl -m-2;
+}
+
+.gradient-sm-small {
+  @apply w-4 h-4 -m-1 blur-xl;
+}
+
+.gradient-lg-big {
+  @apply w-32 h-32 -m-10 blur-[80px];
+}
+
+.gradient-lg-small {
+  @apply w-24 h-24 -m-20 blur-xl;
+}
+
+.rounding {
+  @apply rounded-4xl;
+}

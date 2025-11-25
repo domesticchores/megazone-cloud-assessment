@@ -20,7 +20,7 @@ function WeatherBox({className, weatherData, symbol}: WeatherProps) {
     let name = weatherData.name;
     if (weatherData.name.length == 16) {
         const cropped: number =  parseInt(weatherData.name.substring(11,13));
-        name = cropped < 12 ? cropped + "am" : (cropped % 12 || 12) + "pm"
+        name = cropped < 12 ? (cropped || 12) + "am" : (cropped % 12 || 12) + "pm"
     }
     return <>
         <div className={`m-auto text-center ${className || ''}`}>
@@ -32,8 +32,8 @@ function WeatherBox({className, weatherData, symbol}: WeatherProps) {
                 </>}
                 {Number.isNaN(formattedWeatherData.feelslike) && <>
                     <h2 className="">{formattedWeatherData.high || "?"}°</h2>
-                    <h2 className="">/</h2>
-                    <h2 className="">{formattedWeatherData.low || "?"}°</h2>
+                    <h2 className=""></h2>
+                    <h2 className="text-zinc-400">{formattedWeatherData.low || "?"}°</h2>
                 </>}
             </div>
         </div>

@@ -9,6 +9,7 @@ import { getBulkData, getCurrentData } from "./lib/weatherApi"
 
 import mockData from "./assets/mockForecast.json"
 import FavoriteBar from "./components/FavoriteBar"
+import Blur from "./components/Blur"
 
 function Grid() {
 
@@ -23,8 +24,7 @@ function Grid() {
 
   const [city, setCity] = useState<string>("Rochester, New York");
   const [favorites, setFavorites] = useState<string[]>(["San Antonio, Texas","Avenel, New Jersey","Ann Arbor, Michigan","Washington, District of Columbia, US"]);
-
-  const symbol = 'f';
+  const [symbol, setSymbol] = useState<string>('f');
 
   useEffect(() => {
     getCurrentData(city).then((res) => {
@@ -40,7 +40,7 @@ function Grid() {
     });
   }, [favorites]);
 
-  if (!data || !favData) return <div className="bg-primary w-screen h-screen pt-12"></div>
+  if (!data || !favData) return <div className="bg-primary w-screen h-screen pt-12">Error loading data.</div>
 
     const formattedCurrentData = {
         name: data.location.name,
@@ -55,7 +55,10 @@ function Grid() {
         direction: data.current.wind_dir,
         percentage: data.current.humidity,
         symbol: symbol,
-        forecast: data.forecast.forecastday[0].hour,
+        forecast: [
+            ...data.forecast.forecastday[0].hour,
+            ...data.forecast.forecastday[1].hour
+        ],
         tomorrow: {
             code: data.forecast.forecastday[1].day.condition.code,
             maxtemp_c: data.forecast.forecastday[1].day.maxtemp_c,
@@ -65,27 +68,24 @@ function Grid() {
         }
     }
 
+    const hour = new Date().getHours() 
+
   return (
     // main container
     <div className="bg-primary w-screen h-screen pt-12">
         {/* grid container, with horizontal padding */}
-        <div className="grid w-screen h-full grid-rows-3 md:grid-cols-6 sm:grid-cols-1 gap-4 max-w-7xl mx-auto py-8 px-4">
-            <div className="bg-widget h-full rounded-4xl col-span-1 row-span-2 md:row-span-3 overflow-hidden">
-                <FavoriteBar dataArr={favData} symbol={symbol}></FavoriteBar>
-            </div>
+        <div className="bg-primary absolute h-full left-0 top-0 z-20">
+            <FavoriteBar dataArr={favData} symbol={symbol}></FavoriteBar>
+        </div>
+        <div className="grid w-screen h-full grid-rows-3 md:grid-cols-5 sm:grid-cols-1 gap-4 max-w-6xl mx-auto py-8 px-4 z-10">
 
-            <div className="bg-widget h-full rounded-4xl p-8 col-span-2 row-span-2 md:row-span-3 relative overflow-hidden">
+            <div className="bg-widget h-full rounding p-8 col-span-3 md:col-span-2 row-span-3 relative overflow-hidden">
+                <Blur x={"left"} y={"top"} size={"lg"} color={formattedCurrentData.feelslike_f < 65 ? "blue" : "orange"}/>
+                <Blur x={"right"} y={"bottom"} size={"lg"} color={formattedCurrentData.feelslike_f < 80 ? "blue" : "orange"}/>
+                
+                <Blur x={"left"} y={"bottom"} size={"lg"} color={formattedCurrentData.feelslike_f < 90 ? "blue" : "orange"}/>
 
-                <div className="absolute left-0 top-0 w-32 h-32 bg-orange-500 rounded-full -m-6 blur-[80px]"></div>
-                <div className="absolute left-0 top-0 w-24 h-24 bg-orange-500 -m-12 blur-2xl"></div>
-
-                <div className="absolute right-0 bottom-0 w-32 h-32 bg-orange-500 rounded-full -m-6 blur-[80px]"></div>
-                <div className="absolute right-0 bottom-0 w-24 h-24 bg-orange-500 -m-12 blur-2xl"></div>
-
-                <div className="absolute left-0 bottom-0 w-32 h-32 bg-blue-500 rounded-full -m-6 blur-[80px]"></div>
-                <div className="absolute left-0 bottom-0 w-24 h-24 bg-blue-500 -m-12 blur-2xl"></div>
-
-                <div className="absolute inset-0 border-4 w-full h-full saturate-110 rounded-4xl border-zinc-300/25"></div>
+                <div className="absolute inset-0 border-3 w-full h-full brightness-[300] rounding border-zinc-300/25"></div>
                 
                 <CurrentWeather weatherData={formattedCurrentData}></CurrentWeather>
             </div>
@@ -94,16 +94,22 @@ function Grid() {
             <Humidity percentage={formattedCurrentData.percentage}/>
             <UVIndex index={formattedCurrentData.uv}/>
             
-            <div className="bg-widget h-full rounded-4xl p-2 col-span-3">
+            <div className="bg-widget h-full rounding p-2 col-span-3 relative overflow-hidden">
+                <Blur x={"right"} y={"top"} size={"lg"} color={"blue"}/>
+                <div className="absolute inset-0 border-3 w-full h-full brightness-[300] rounding border-zinc-300/25"></div>
+
                 <h2 className="text-2xl font-semibold text-center mb-2">Today's Forecast</h2>
                 <div className="flex">
-                    {[8,12,16,18,20].map(index => formattedCurrentData.forecast[index]).map((hour: any) => {
+                    {[0,1,2,3,4].map(index => formattedCurrentData.forecast[hour+index]).map((hour: any) => {
                         return <WeatherBox symbol={symbol} key={hour.time} weatherData={{name: hour.time,...hour}}></WeatherBox>
                     })}
                 </div>
             </div>
 
-            <div className="bg-widget h-full rounded-4xl py-4 px-12 col-span-3 flex">
+            <div className="bg-widget h-full rounding py-4 px-12 col-span-3 flex relative overflow-hidden">
+                <Blur x={"right"} y={"bottom"} size={"lg"} color={"blue"}/>
+                <div className="absolute inset-0 border-3 w-full h-full brightness-[300] rounding border-zinc-300/25"></div>
+
                 <TomorrowPredicted weatherData={{name: formattedCurrentData.name,symbol:formattedCurrentData.symbol,...formattedCurrentData.tomorrow}}></TomorrowPredicted>
             </div>
         </div>
