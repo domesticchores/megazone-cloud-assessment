@@ -39,5 +39,5 @@
 }
 
 .rounding {
-  @apply rounded-4xl;
+  @apply rounded-3xl;
 }

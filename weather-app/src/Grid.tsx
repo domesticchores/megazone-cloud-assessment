@@ -74,16 +74,16 @@ function Grid() {
     // main container
     <div className="bg-primary w-screen h-screen pt-12">
         {/* grid container, with horizontal padding */}
-        <div className="bg-primary absolute h-full left-0 top-0 z-20">
+        <div className="bg-zinc-900 absolute h-full left-0 top-0 z-10 pt-12">
             <FavoriteBar dataArr={favData} symbol={symbol}></FavoriteBar>
         </div>
         <div className="grid w-screen h-full grid-rows-3 md:grid-cols-5 sm:grid-cols-1 gap-4 max-w-6xl mx-auto py-8 px-4 z-10">
 
             <div className="bg-widget h-full rounding p-8 col-span-3 md:col-span-2 row-span-3 relative overflow-hidden">
                 <Blur x={"left"} y={"top"} size={"lg"} color={formattedCurrentData.feelslike_f < 65 ? "blue" : "orange"}/>
-                <Blur x={"right"} y={"bottom"} size={"lg"} color={formattedCurrentData.feelslike_f < 80 ? "blue" : "orange"}/>
+                <Blur x={"right"} y={"bottom"} size={"lg"} color={formattedCurrentData.feelslike_f < 75 ? "blue" : "orange"}/>
                 
-                <Blur x={"left"} y={"bottom"} size={"lg"} color={formattedCurrentData.feelslike_f < 90 ? "blue" : "orange"}/>
+                <Blur x={"left"} y={"bottom"} size={"lg"} color={formattedCurrentData.feelslike_f < 95 ? "blue" : "orange"}/>
 
                 <div className="absolute inset-0 border-3 w-full h-full brightness-[300] rounding border-zinc-300/25"></div>
                 
@@ -95,7 +95,7 @@ function Grid() {
             <UVIndex index={formattedCurrentData.uv}/>
             
             <div className="bg-widget h-full rounding p-2 col-span-3 relative overflow-hidden">
-                <Blur x={"right"} y={"top"} size={"lg"} color={"blue"}/>
+                <Blur x={"right"} y={"top"} size={"lg"} color={formattedCurrentData.forecast[hour+5].feelslike_f < 69 ? "blue" : "orange"}/>
                 <div className="absolute inset-0 border-3 w-full h-full brightness-[300] rounding border-zinc-300/25"></div>
 
                 <h2 className="text-2xl font-semibold text-center mb-2">Today's Forecast</h2>
@@ -107,7 +107,7 @@ function Grid() {
             </div>
 
             <div className="bg-widget h-full rounding py-4 px-12 col-span-3 flex relative overflow-hidden">
-                <Blur x={"right"} y={"bottom"} size={"lg"} color={"blue"}/>
+                <Blur x={"right"} y={"bottom"} size={"lg"} color={formattedCurrentData.tomorrow.maxtemp_f < 69 ? "blue" : "orange"}/>
                 <div className="absolute inset-0 border-3 w-full h-full brightness-[300] rounding border-zinc-300/25"></div>
 
                 <TomorrowPredicted weatherData={{name: formattedCurrentData.name,symbol:formattedCurrentData.symbol,...formattedCurrentData.tomorrow}}></TomorrowPredicted>
