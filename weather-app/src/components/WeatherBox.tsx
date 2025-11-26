@@ -28,12 +28,12 @@ function WeatherBox({className, weatherData, symbol}: WeatherProps) {
             <span className="material-symbols-rounded text-[1em]! md:text-[2em]! lg:text-[4em]! m-auto">{getWeatherIcon(formattedWeatherData.code, formattedWeatherData.is_day)}</span>
             <div className="flex w-fit text-md md:text-lg lg:text-2xl font-bold gap-x-1 items-center m-auto -mt-2">
                 {!Number.isNaN(formattedWeatherData.feelslike) && <>
-                    <h2 className="">{formattedWeatherData.feelslike || "?"}°</h2>
+                    <h2 className="">{formattedWeatherData.feelslike}°</h2>
                 </>}
                 {Number.isNaN(formattedWeatherData.feelslike) && <>
-                    <h2 className="">{formattedWeatherData.high || "?"}°</h2>
+                    <h2 className="">{formattedWeatherData.high}°</h2>
                     <h2 className=""></h2>
-                    <h2 className="text-zinc-400">{formattedWeatherData.low || "?"}°</h2>
+                    <h2 className="text-zinc-400">{formattedWeatherData.low}°</h2>
                 </>}
             </div>
         </div>
