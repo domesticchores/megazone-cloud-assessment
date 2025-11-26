@@ -11,6 +11,7 @@ import mockData from "./assets/mockForecast.json"
 import FavoriteBar from "./components/FavoriteBar"
 import Blur from "./components/Blur"
 import TodayForecast from "./components/TodayForecast"
+import Widget from "./components/Widget"
 
 interface weatherVariables {
     city: string,
@@ -113,27 +114,27 @@ function Grid(varData: weatherVariables) {
         <FavoriteBar dataArr={favData} symbol={symbol}></FavoriteBar>
         <div className="grid w-screen h-full grid-rows-3 md:grid-cols-5 sm:grid-cols-1 gap-4 max-w-6xl mx-auto py-8 px-4 z-10">
 
-            <div className="bg-widget h-full rounding p-4 md:p-8 col-span-3 md:col-span-2 row-span-3 relative overflow-hidden">
+            <Widget style={"lg"}>
                 <CurrentWeather weatherData={formattedCurrentData}></CurrentWeather>
-            </div>
+            </Widget>
 
-            <div className="bg-widget h-full rounding p-2 col-span-1 flex relative overflow-hidden">
+            <Widget style={"sm"}>
                 <WindDirection direction={formattedCurrentData?.direction} speed={formattedCurrentData?.speed || 0}/>
-            </div>
-            <div className="bg-widget h-full rounding p-2 col-span-1 flex relative overflow-hidden">
+            </Widget>
+            <Widget style={"sm"}>
                 <Humidity percentage={formattedCurrentData?.percentage}/>
-            </div>
-            <div className="bg-widget h-full rounding p-2 col-span-1 flex relative overflow-hidden">
-                <UVIndex index={formattedCurrentData?.uv}/>
-            </div>
+            </Widget>
+            <Widget style={"sm"}>
+                <UVIndex uv={formattedCurrentData?.uv}/>
+            </Widget>
             
-            <div className="bg-widget h-full rounding p-2 col-span-3 relative overflow-hidden">
+            <Widget style={"md-2"}>
                 <TodayForecast weatherData={formattedCurrentData} symbol={symbol}></TodayForecast>
-            </div>
+            </Widget>
 
-            <div className="bg-widget h-full rounding py-4 px-12 col-span-3 flex relative overflow-hidden">
-                <TomorrowPredicted weatherData={{name: formattedCurrentData?.name,symbol:formattedCurrentData?.symbol,...formattedCurrentData?.tomorrow}}></TomorrowPredicted>
-            </div>
+            <Widget style={"md-1"}>
+                 <TomorrowPredicted weatherData={{name: formattedCurrentData?.name,symbol:formattedCurrentData?.symbol,...formattedCurrentData?.tomorrow}}></TomorrowPredicted>
+            </Widget>
         </div>
     </div>
   )

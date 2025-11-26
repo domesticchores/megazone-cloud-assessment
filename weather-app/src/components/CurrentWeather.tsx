@@ -15,7 +15,6 @@ function CurrentWeather({className, weatherData}: WeatherProps) {
         
         <Blur x={"left"} y={"bottom"} size={"lg"} color={weatherData.feelslike_f < 95 ? "blue" : "orange"}/>
 
-        <div className="absolute inset-0 border-3 w-full h-full brightness-[300] rounding border-zinc-300/25"></div>
         <div className="relative z-10 h-full w-full">
             <div className="w-full h-1/12 text-center relative">
                 <h1 className="text-2xl md:text-3xl">{weatherData.name}</h1>

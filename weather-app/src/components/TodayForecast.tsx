@@ -11,7 +11,6 @@ function TodayForecast({weatherData, symbol}: Forecast) {
     if (!weatherData) return <div></div>
     return <>
         <Blur x={"right"} y={"top"} size={"lg"} color={weatherData.forecast[hour+5].feelslike_f < 69 ? "blue" : "orange"}/>
-        <div className="absolute inset-0 border-3 w-full h-full brightness-[300] rounding border-zinc-300/25"></div>
 
         <h2 className="text-2xl font-semibold text-center mb-2">Today's Forecast</h2>
         <div className="flex">

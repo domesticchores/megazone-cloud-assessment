@@ -12,7 +12,7 @@ function TomorrowPredicted({className, weatherData}: WeatherProps) {
     const codeData = getWeatherData(weatherData.code);
         return <>
         <Blur x={"right"} y={"bottom"} size={"lg"} color={weatherData.maxtemp_f < 69 ? "blue" : "orange"}/>
-        <div className="absolute inset-0 border-3 w-full h-full brightness-[300] rounding border-zinc-300/25"></div>
+        
         <div className={`w-1/2 text-center flex z-10 ${className || ''}`}>
             <div className="w-fit m-auto">
                 <h2 className="text-2xl font-semibold">Tomorrow's Forecast</h2>
