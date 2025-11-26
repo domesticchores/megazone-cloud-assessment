@@ -14,8 +14,7 @@ function Blur({x,y,size,color}: BlurProps) {
         top: 'top-0',
         bottom: 'bottom-0'
     }
-
-    console.log(`absolute ${x}-0 ${y}-0 gradient-${size}-big bg-${color}-500 rounded-full animate-custom z-0`)
+    
     return <>
             <div className={`absolute ${varients[x]} ${varients[y]} gradient-${size}-big ${varients[color]} rounded-full animate-custom z-0`}></div>
             <div className={`absolute ${varients[x]} ${varients[y]} gradient-${size}-small ${varients[color]} animate-custom z-0`}></div>

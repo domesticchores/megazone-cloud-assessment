@@ -7,6 +7,7 @@ interface WeatherProps {
 }
 
 function WeatherBox({className, weatherData, symbol}: WeatherProps) {
+    if (!weatherData) return <div></div>
     const formattedWeatherData = {
             name: weatherData.name,
             code: weatherData.code || weatherData.condition.code,
