@@ -10,6 +10,7 @@ interface weatherVariables {
 }
 
 function Modal({isOpen,toggle,data}: {isOpen: boolean, toggle: Function, data: weatherVariables}) {
+    const [localFavorites, setLocalFavorites] = useState<string[]>(data.favorites)
 
     useEffect(()=>{
         toggle(isOpen)
@@ -17,30 +18,51 @@ function Modal({isOpen,toggle,data}: {isOpen: boolean, toggle: Function, data: w
 
     function handleSubmit(e: any): void {
         e.preventDefault();
-        console.log(e.target.city.value, e.target.favorites.value, e.target.symbol.value);
+        console.log(localFavorites.filter((item)=>item.trim().length > 0));
         data.setCity(e.target.city.value);
-        data.setSymbol(e.target.favorites.value);
+        data.setFavorites(localFavorites.filter((item)=>item.trim().length > 0));
         data.setSymbol(e.target.symbol.value)
         toggle(false);
+    }
+
+    function addCity(): void {
+        setLocalFavorites([...localFavorites,""]);
+    }
+
+    function removeCity(idx:number): void {
+        setLocalFavorites(localFavorites.filter((_, index) => index !== idx));
+    }
+
+    function editCity(idx:number, value: any): void {
+        const temp = [...localFavorites];
+        temp[idx] = value.target.value;
+        setLocalFavorites(temp);
     }
 
     if (!isOpen) return <></>
     return <>
         <div className="absolute w-screen h-screen inset-0 flex z-50">
             <div className="absolute w-screen h-screen inset-0 bg-black/50 z-10" onClick={()=>{toggle(false)}}></div>
-            <div className="relative w-3/4 md:w-1/2 lg:w-1/3 h-1/2 bg-white rounded-sm m-auto z-20 p-4 text-black">
+            <div className="relative w-3/4 md:max-w-lg lg:max-w-xl h-1/2 bg-white rounded-sm m-auto z-20 p-4 text-black">
                 <h1 className="text-xl font-semibold">Weather Configuration</h1>
                 <hr/>
                 <form action="submit" onSubmit={handleSubmit}>
-                    <label htmlFor="city" className="mr-2">Current City:</label>
-                    <input name="city" defaultValue={data.city || ''} className="border-2"></input>
+                    <div className="w-full h-64 overflow-y-scroll scrollbar-thin p-4">
+                                            <label htmlFor="city" className="mr-2">Current City:</label>
+                    <input name="city" defaultValue={data.city || ''} className="border"></input>
 
                     <br className="m-5"></br>
 
                     <label htmlFor="favorites" className="mr-2">Favorites:</label>
-                    <input name="favorites" defaultValue={data.favorites || ''} className="border-2"></input>
-
-                    <br className="m-5"></br>
+                    <div className="mb-2">
+                        {localFavorites.map((city: string, idx: number)=>{
+                            return <div className="flex">
+                                <input name="favorites" key={city+idx} defaultValue={city} className="border mb-1 w-full" onChange={(e:any)=>{editCity(idx,e)}}></input>
+                                <button className="h-6 aspect-square bg-red-500" type="button" onClick={()=>{removeCity(idx)}}>-</button>
+                            </div>
+                        })}
+                        <button className="h-6 aspect-square bg-green-500" type="button" onClick={addCity}>+</button>
+                    </div>
 
                     <p>Symbol:</p>
                     <div className="flex gap-x-4">
@@ -53,8 +75,9 @@ function Modal({isOpen,toggle,data}: {isOpen: boolean, toggle: Function, data: w
                         Celcius
                         </label>
                     </div>
+                    </div>
 
-                    <button className="absolute bottom-4 right-4 bg-blue-400 hover:bg-blue-500 p-2 text-white rounded-sm" type="submit">Submit</button>
+                    <button className="absolute bottom-3 right-4 bg-blue-400 hover:bg-blue-500 p-2 text-white rounded-sm" type="submit">Submit</button>
                 </form>
             </div>
             
