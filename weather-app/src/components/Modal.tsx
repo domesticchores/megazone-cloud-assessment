@@ -34,9 +34,8 @@ function Modal({isOpen,toggle,data}: {isOpen: boolean, toggle: Function, data: w
     }
 
     function editCity(idx:number, value: any): void {
-        const temp = [...localFavorites];
-        temp[idx] = value.target.value;
-        setLocalFavorites(temp);
+        // purposefully don't set state, so that it doesn't update until very end
+        localFavorites[idx] = value.target.value;
     }
 
     if (!isOpen) return <></>
@@ -56,9 +55,9 @@ function Modal({isOpen,toggle,data}: {isOpen: boolean, toggle: Function, data: w
                     <label htmlFor="favorites" className="mr-2">Favorites:</label>
                     <div className="mb-2">
                         {localFavorites.map((city: string, idx: number)=>{
-                            return <div className="flex">
-                                <input name="favorites" key={city+idx} defaultValue={city} className="border mb-1 w-full" onChange={(e:any)=>{editCity(idx,e)}}></input>
-                                <button className="h-6 aspect-square bg-red-500" type="button" onClick={()=>{removeCity(idx)}}>-</button>
+                            return <div key={city+idx} className="flex">
+                                <input name="favorites" key={"input"+city+idx} defaultValue={city} className="border mb-1 w-full" onChange={(e:any)=>{editCity(idx,e)}}></input>
+                                <button key={"button-"+city+idx} className="h-6 aspect-square bg-red-500" type="button" onClick={()=>{removeCity(idx)}}>-</button>
                             </div>
                         })}
                         <button className="h-6 aspect-square bg-green-500" type="button" onClick={addCity}>+</button>
