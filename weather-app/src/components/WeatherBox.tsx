@@ -23,7 +23,7 @@ function WeatherBox({className, weatherData, symbol}: WeatherProps) {
         name = cropped < 12 ? (cropped || 12) + "am" : (cropped % 12 || 12) + "pm"
     }
     return <>
-        <div className={`m-auto text-center ${className || ''}`}>
+        <div className={`m-auto text-center relative z-10 ${className || ''}`}>
             <h2 className="text-md md:text-md lg:text-xl font-bold mb-1">{name}</h2>
             <span className="material-symbols-rounded text-[1em]! md:text-[2em]! lg:text-[4em]! m-auto">{getWeatherIcon(formattedWeatherData.code, formattedWeatherData.is_day)}</span>
             <div className="flex w-fit text-md md:text-lg lg:text-2xl font-bold gap-x-1 items-center m-auto -mt-2">

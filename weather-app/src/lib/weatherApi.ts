@@ -1,3 +1,6 @@
+import mockForecast from "../assets/mockForecast.json"
+import mockBulk from "../assets/mockBulk.json"
+
 const headers = {
           'Content-Type': 'application/json',
           'key': import.meta.env.VITE_KEY,
@@ -10,6 +13,7 @@ export async function getCurrentData(city: string) {
     });
     if (!res.ok) {
         console.error("could not get data");
+        return mockForecast;
     }
     // console.log(res);
 
@@ -25,7 +29,7 @@ export async function getBulkData(cities: string[]) {
             })
         ]
     }
-    
+
     const res = await fetch("http://api.weatherapi.com/v1/current.json?q=bulk",{
         method: 'POST',
         headers: headers,
@@ -33,6 +37,7 @@ export async function getBulkData(cities: string[]) {
     });
     if (!res.ok) {
         console.error("could not get data");
+        return mockBulk;
     }
     console.log(res);
 

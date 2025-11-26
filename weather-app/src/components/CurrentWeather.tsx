@@ -7,8 +7,8 @@ interface WeatherProps {
 
 function CurrentWeather({className, weatherData}: WeatherProps) {
     const codeData = getWeatherData(weatherData.code);
-    return <>
-        <div className="w-full h-1/12 text-center">
+    return <div className="relative z-10 h-full w-full">
+        <div className="w-full h-1/12 text-center relative">
             <h1 className="text-3xl">{weatherData.name}</h1>
         </div>
         <div className={`w-full h-1/2 flex ${className || ''}`}>
@@ -21,7 +21,7 @@ function CurrentWeather({className, weatherData}: WeatherProps) {
             <h1 className="text-8xl font-bold">{weatherData["feelslike_"+weatherData.symbol]}°{weatherData.symbol.toUpperCase()}</h1>
             <p className="text-2xl">Actual: {weatherData["temp_"+weatherData.symbol]}°{weatherData.symbol.toUpperCase()}</p>
         </div>
-    </>
+    </div>
 }
 
 export default CurrentWeather;

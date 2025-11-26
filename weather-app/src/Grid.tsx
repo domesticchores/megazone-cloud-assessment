@@ -1,4 +1,4 @@
-import { useState, useEffect, use } from "react"
+import { useState, useEffect } from "react"
 import CurrentWeather from "./components/CurrentWeather"
 import Humidity from "./components/Humidity"
 import TomorrowPredicted from "./components/TomorrowPredicted"
@@ -11,7 +11,16 @@ import mockData from "./assets/mockForecast.json"
 import FavoriteBar from "./components/FavoriteBar"
 import Blur from "./components/Blur"
 
-function Grid() {
+interface weatherVariables {
+    city: string,
+    favorites: string[],
+    symbol: string,
+    setCity: Function,
+    setFavorites: Function,
+    setSymbol: Function
+}
+
+function Grid(varData: weatherVariables) {
 
   const mockWeatherBoxData = {name:"Paris",code:'1003','high':43,'low':29,'symbol':'F'};
   const mockCurrentWeatherData = {name:"Rochester",code:'1003','temp':40,'feelslike':35,'symbol':'F'};
@@ -19,12 +28,12 @@ function Grid() {
   const mockHumidity = {percentage: 57}
   const mockWindDirection = {speed: 7.6, direction: "NW"}
 
+  const city = varData.city;
+  const favorites = varData.favorites;
+  const symbol = varData.symbol
+
   const [data, setData] = useState<any>(null);
   const [favData, setFavData] = useState<any>(null);
-
-  const [city, setCity] = useState<string>("Rochester, New York");
-  const [favorites, setFavorites] = useState<string[]>(["San Antonio, Texas","Avenel, New Jersey","Ann Arbor, Michigan","Washington, District of Columbia, US"]);
-  const [symbol, setSymbol] = useState<string>('f');
 
   useEffect(() => {
     getCurrentData(city).then((res) => {
@@ -74,7 +83,7 @@ function Grid() {
     // main container
     <div className="bg-primary w-screen h-screen pt-12">
         {/* grid container, with horizontal padding */}
-        <div className="bg-zinc-900 absolute h-full left-0 top-0 z-10 pt-12">
+        <div className="bg-zinc-900 absolute h-full left-0 top-0 z-30 pt-12">
             <FavoriteBar dataArr={favData} symbol={symbol}></FavoriteBar>
         </div>
         <div className="grid w-screen h-full grid-rows-3 md:grid-cols-5 sm:grid-cols-1 gap-4 max-w-6xl mx-auto py-8 px-4 z-10">
