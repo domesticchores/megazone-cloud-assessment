@@ -83,9 +83,7 @@ function Grid(varData: weatherVariables) {
     // main container
     <div className="bg-primary w-screen h-screen pt-12">
         {/* grid container, with horizontal padding */}
-        <div className="bg-zinc-900 absolute h-full left-0 top-0 z-30 pt-12">
-            <FavoriteBar dataArr={favData} symbol={symbol}></FavoriteBar>
-        </div>
+        <FavoriteBar dataArr={favData} symbol={symbol}></FavoriteBar>
         <div className="grid w-screen h-full grid-rows-3 md:grid-cols-5 sm:grid-cols-1 gap-4 max-w-6xl mx-auto py-8 px-4 z-10">
 
             <div className="bg-widget h-full rounding p-8 col-span-3 md:col-span-2 row-span-3 relative overflow-hidden">
