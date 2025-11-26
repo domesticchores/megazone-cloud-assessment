@@ -40,27 +40,33 @@ function Modal({isOpen,toggle,data}: {isOpen: boolean, toggle: Function, data: w
 
     if (!isOpen) return <></>
     return <>
-        <div className="absolute w-screen h-screen inset-0 flex z-50">
+        <div className="absolute w-screen h-screen inset-0 flex z-50 leading-8">
             <div className="absolute w-screen h-screen inset-0 bg-black/50 z-10" onClick={()=>{toggle(false)}}></div>
-            <div className="relative w-3/4 md:max-w-lg lg:max-w-xl h-1/2 bg-white rounded-sm m-auto z-20 p-4 text-black">
-                <h1 className="text-xl font-semibold">Weather Configuration</h1>
-                <hr/>
-                <form action="submit" onSubmit={handleSubmit}>
-                    <div className="w-full h-64 overflow-y-scroll scrollbar-thin p-4">
-                                            <label htmlFor="city" className="mr-2">Current City:</label>
-                    <input name="city" defaultValue={data.city || ''} className="border"></input>
-
-                    <br className="m-5"></br>
+            <div className="relative w-3/4 md:max-w-md lg:max-w-lg h-2/3 bg-modal rounding m-auto z-20 p-6 text-modal">
+                <div className="h-fit">
+                    <h1 className="text-xl font-semibold mb-2">Weather Configuration</h1>
+                    <hr/>
+                </div>
+                <form action="submit" onSubmit={handleSubmit} className="flex flex-col h-11/12">
+                    <div className="w-full overflow-y-scroll scrollbar-thin p-4 h-full">
+                    <div className="w-full flex mb-5">
+                        <label htmlFor="city" className="mr-2 w-1/3">Current City:</label>
+                        <input name="city" defaultValue={data.city || ''} className="border-modal rounded-lg px-1 w-full"></input>
+                    </div>
 
                     <label htmlFor="favorites" className="mr-2">Favorites:</label>
-                    <div className="mb-2">
+                    <div className="mb-5">
                         {localFavorites.map((city: string, idx: number)=>{
-                            return <div key={city+idx} className="flex">
-                                <input name="favorites" key={"input"+city+idx} defaultValue={city} className="border mb-1 w-full" onChange={(e:any)=>{editCity(idx,e)}}></input>
-                                <button key={"button-"+city+idx} className="h-6 aspect-square bg-red-500" type="button" onClick={()=>{removeCity(idx)}}>-</button>
+                            return <div key={city+idx} className="flex gap-x-1 my-1">
+                                <input name="favorites" key={"input"+city+idx} defaultValue={city} className="border-modal rounded-lg px-1 mb-1 w-full" onChange={(e:any)=>{editCity(idx,e)}}></input>
+                                <button key={"button-"+city+idx} className="aspect-square text-red-500 my-auto h-6 flex" type="button" onClick={()=>{removeCity(idx)}}>
+                                    <span className="material-symbols-rounded text-[1.5em]! my-auto">close_small</span>
+                                </button>
                             </div>
                         })}
-                        <button className="h-6 aspect-square bg-green-500" type="button" onClick={addCity}>+</button>
+                        <button className="h-6 aspect-square text-green-500" type="button" onClick={addCity}>
+                            <span className="material-symbols-rounded text-[1.5em]!">add_circle</span>
+                        </button>
                     </div>
 
                     <p>Symbol:</p>
@@ -76,7 +82,7 @@ function Modal({isOpen,toggle,data}: {isOpen: boolean, toggle: Function, data: w
                     </div>
                     </div>
 
-                    <button className="absolute bottom-3 right-4 bg-blue-400 hover:bg-blue-500 p-2 text-white rounded-sm" type="submit">Submit</button>
+                    <button className="bg-blue-400 hover:bg-blue-500 p-1 mt-2 text-white rounded-lg" type="submit">Submit</button>
                 </form>
             </div>
             

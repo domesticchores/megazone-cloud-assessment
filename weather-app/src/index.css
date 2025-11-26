@@ -18,6 +18,22 @@
   @apply bg-zinc-700;
 }
 
+.bg-favorites {
+  @apply bg-stone-900
+}
+
+.bg-modal {
+  @apply bg-zinc-700
+}
+
+.text-modal {
+  @apply text-zinc-200
+}
+
+.border-modal {
+  @apply border border-zinc-500
+}
+
 .custom-scroll {
   @apply scrollbar-thin scrollbar-thumb-zinc-600 scrollbar-track-stone-900;
 }

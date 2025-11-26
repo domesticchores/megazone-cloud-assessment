@@ -1,15 +1,24 @@
 interface BlurProps {
-    x: string,
-    y: string,
-    size: string,
-    color: string
+    x: "left" | "right",
+    y: "top" | "bottom",
+    size: "sm" | "lg",
+    color: "blue" | "orange"
 }
 
 function Blur({x,y,size,color}: BlurProps) {
+    const varients = {
+        blue: "bg-blue-500",
+        orange: 'bg-orange-500',
+        left: 'left-0',
+        right: 'right-0',
+        top: 'top-0',
+        bottom: 'bottom-0'
+    }
 
+    console.log(`absolute ${x}-0 ${y}-0 gradient-${size}-big bg-${color}-500 rounded-full animate-custom z-0`)
     return <>
-            <div className={`absolute ${x}-0 ${y}-0 gradient-${size}-big bg-${color}-500 rounded-full animate-custom z-0`}></div>
-            <div className={`absolute ${x}-0 ${y}-0 gradient-${size}-small bg-${color}-500 animate-custom z-0`}></div>
+            <div className={`absolute ${varients[x]} ${varients[y]} gradient-${size}-big ${varients[color]} rounded-full animate-custom z-0`}></div>
+            <div className={`absolute ${varients[x]} ${varients[y]} gradient-${size}-small ${varients[color]} animate-custom z-0`}></div>
         </>
 }
 
