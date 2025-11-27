@@ -8,7 +8,14 @@ interface Forecast {
 
 function TodayForecast({weatherData, symbol}: Forecast) {
     const hour = new Date().getHours()
-    if (!weatherData) return <div></div>
+    if (!weatherData) return <div className="animate-pulse">
+        <h2 className="text-2xl font-semibold text-center mb-2 py-2"><div className="w-full h-[1em] bg-zinc-500 rounding"></div></h2>
+        <div className="flex">
+            {[0,1,2,3,4].map((hour: any) => {
+                return <WeatherBox symbol={symbol} key={hour.time} weatherData={null}></WeatherBox>
+            })}
+        </div>
+    </div>
     return <>
         <Blur x={"right"} y={"top"} size={"lg"} color={weatherData.forecast[hour+5].feelslike_f < 69 ? "blue" : "orange"}/>
 

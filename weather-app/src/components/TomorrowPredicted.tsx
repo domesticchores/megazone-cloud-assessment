@@ -8,11 +8,19 @@ interface WeatherProps {
 }
 
 function TomorrowPredicted({className, weatherData}: WeatherProps) {
-    if (!weatherData.code) return <div></div>
+    if (!weatherData.code) return <div className="flex animate-pulse w-screen">
+        <div className={`w-1/2 text-center flex z-10 ${className || ''}`}>
+            <div className="w-full m-auto">
+                <h2 className="text-2xl font-semibold py-2"><div className="w-full h-[1em] bg-zinc-500 rounding"></div></h2>
+                <p className="my-auto text-xl text-center w-full"><div className="w-full h-[1em] bg-zinc-500 rounding"></div></p>
+            </div>
+        </div>
+        <WeatherBox weatherData={null} symbol={weatherData.symbol}></WeatherBox>
+    </div>
     const codeData = getWeatherData(weatherData.code);
         return <>
         <Blur x={"right"} y={"bottom"} size={"lg"} color={weatherData.maxtemp_f < 69 ? "blue" : "orange"}/>
-        
+
         <div className={`w-1/2 text-center flex z-10 ${className || ''}`}>
             <div className="w-fit m-auto">
                 <h2 className="text-2xl font-semibold">Tomorrow's Forecast</h2>
