@@ -18,7 +18,8 @@ function CurrentWeather({className, weatherData}: WeatherProps) {
                 <h1 className="text-xl md:text-3xl"><div className="w-full h-[1em] bg-zinc-500 rounding"></div></h1>
             </div>
             <div className="w-full h-3/12 text-center">
-                <h1 className="text-6xl md:text-8xl font-bold"><div className="w-full h-[1em] bg-zinc-500 rounding"></div></h1>
+                <h1 className="text-6xl md:text-8xl font-bold mb-3"><div className="w-full h-[1em] bg-zinc-500 rounding"></div></h1>
+                <h1 className="text-xl md:text-3xl"><div className="w-full h-[1em] bg-zinc-500 rounding"></div></h1>
             </div>
         </div>
     const codeData = getWeatherData(weatherData.code);
