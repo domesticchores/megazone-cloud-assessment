@@ -49,8 +49,8 @@ function Modal({isOpen,toggle,data}: {isOpen: boolean, toggle: Function, data: w
                 </div>
                 <form action="submit" onSubmit={handleSubmit} className="flex flex-col h-11/12">
                     <div className="w-full overflow-y-scroll scrollbar-thin p-4 h-full">
-                    <div className="w-full flex mb-5">
-                        <label htmlFor="city" className="mr-2 w-1/3">Current City:</label>
+                    <div className="w-full flex flex-col md:flex-row mb-5">
+                        <label htmlFor="city" className="mr-2 min-w-1/3">Current City:</label>
                         <input name="city" defaultValue={data.city || ''} className="border-modal rounded-lg px-1 w-full"></input>
                     </div>
 
