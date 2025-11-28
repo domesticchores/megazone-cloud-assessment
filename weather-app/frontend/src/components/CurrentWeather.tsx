@@ -9,17 +9,17 @@ interface WeatherProps {
 function CurrentWeather({className, weatherData}: WeatherProps) {
     if (!weatherData) return <div className="relative z-10 h-full w-full animate-pulse">
             <div className="w-full h-1/12 text-center relative">
-                <h1 className="text-2xl md:text-3xl"><div className="w-full h-[1em] bg-zinc-500 rounding"></div></h1>
+                <h1 className="text-2xl md:text-3xl"><span className="block w-full h-[1em] bg-zinc-500 rounding"></span></h1>
             </div>
             <div className={`w-full h-3/7 md:h-1/2 flex ${className || ''}`}>
                 <span className="material-symbols-rounded text-[6em]! md:text-[12em]! lg:text-[15em]! m-auto text-zinc-500">sunny</span>
             </div>
             <div className="w-full h-1/12 text-center mb-4">
-                <h1 className="text-xl md:text-3xl"><div className="w-full h-[1em] bg-zinc-500 rounding"></div></h1>
+                <h1 className="text-xl md:text-3xl"><span className="block w-full h-[1em] bg-zinc-500 rounding"></span></h1>
             </div>
             <div className="w-full h-3/12 text-center">
-                <h1 className="text-6xl md:text-8xl font-bold mb-3"><div className="w-full h-[1em] bg-zinc-500 rounding"></div></h1>
-                <h1 className="text-xl md:text-3xl"><div className="w-full h-[1em] bg-zinc-500 rounding"></div></h1>
+                <h1 className="text-6xl md:text-8xl font-bold mb-3"><span className="block w-full h-[1em] bg-zinc-500 rounding"></span></h1>
+                <h1 className="text-xl md:text-3xl"><span className="block w-full h-[1em] bg-zinc-500 rounding"></span></h1>
             </div>
         </div>
     const codeData = getWeatherData(weatherData.code);
