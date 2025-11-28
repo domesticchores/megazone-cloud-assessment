@@ -26,10 +26,35 @@ app.post('/main', async (req, res) => {
   if (!response.ok) {
     const err = await response.json();
       console.error("could not get response: ", err);
-      return res.status(400).json();
+      return res.status(400).json(err);
   }
 
   res.json(await response.json());
+  } catch (err) {
+    console.log("server error: ", err)
+    return res.status(500).json({message: "Internal Server Error", error: err})
+  }
+})
+
+app.post('/favorites', async (req, res) => {
+  try {
+    const favorites = req.body;
+    console.log(favorites)
+    if (!favorites) {
+      return res.status(400).json({message: "Bad Request!"});
+    }
+    const response = await fetch("http://api.weatherapi.com/v1/current.json?q=bulk",{
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(favorites)
+    });
+    if (!response.ok) {
+      const err = await response.json();
+        console.error("could not get response: ", err);
+        return res.status(400).json(err);
+    }
+
+    res.json(await response.json());
   } catch (err) {
     console.log("server error: ", err)
     return res.status(500).json({message: "Internal Server Error", error: err})
