@@ -3,13 +3,10 @@ import CurrentWeather from "./components/CurrentWeather"
 import Humidity from "./components/Humidity"
 import TomorrowPredicted from "./components/TomorrowPredicted"
 import UVIndex from "./components/UVIndex"
-import WeatherBox from "./components/WeatherBox"
 import WindDirection from "./components/WindDirection"
 import { getBulkData, getCurrentData } from "./lib/weatherApi"
 
-import mockData from "./assets/mockForecast.json"
 import FavoriteBar from "./components/FavoriteBar"
-import Blur from "./components/Blur"
 import TodayForecast from "./components/TodayForecast"
 import Widget from "./components/Widget"
 
@@ -46,12 +43,6 @@ interface formattedData {
 }
 
 function Grid(varData: weatherVariables) {
-
-  const mockWeatherBoxData = {name:"Paris",code:'1003','high':43,'low':29,'symbol':'F'};
-  const mockCurrentWeatherData = {name:"Rochester",code:'1003','temp':40,'feelslike':35,'symbol':'F'};
-  const mockUV = {uv: 0}
-  const mockHumidity = {percentage: 57}
-  const mockWindDirection = {speed: 7.6, direction: "NW"}
 
   const city = varData.city;
   const favorites = varData.favorites;
