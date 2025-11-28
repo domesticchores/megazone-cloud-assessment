@@ -2,14 +2,14 @@ import mockForecast from "../assets/mockForecast.json"
 import mockBulk from "../assets/mockBulk.json"
 
 const headers = {
-          'Content-Type': 'application/json',
-          'key': import.meta.env.VITE_KEY,
+          'Content-Type': 'application/json'
 }
 
 export async function getCurrentData(city: string) {
-    const res = await fetch(`http://api.weatherapi.com/v1/forecast.json?q=${city}&days=2`,{
-        method: 'GET',
-        headers: headers
+    const res = await fetch(import.meta.env.VITE_API+"/main",{
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify({city:city})
     });
     if (!res.ok) {
         console.error("could not get data");
@@ -30,7 +30,7 @@ export async function getBulkData(cities: string[]) {
         ]
     }
 
-    const res = await fetch("http://api.weatherapi.com/v1/current.json?q=bulk",{
+    const res = await fetch(import.meta.env.VITE_API+"/favorites",{
         method: 'POST',
         headers: headers,
         body: JSON.stringify(formattedCities)

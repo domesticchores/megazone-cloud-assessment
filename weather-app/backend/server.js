@@ -1,4 +1,5 @@
 const express = require('express')
+const cors = require('cors')
 require('dotenv').config()
 const app = express()
 
@@ -12,6 +13,7 @@ app.get('/', (req, res) => {
 })
 
 app.use(express.json())
+app.use(cors({origin:"http://localhost:5173"}))
 
 app.post('/main', async (req, res) => {
   try {
@@ -39,7 +41,6 @@ app.post('/main', async (req, res) => {
 app.post('/favorites', async (req, res) => {
   try {
     const favorites = req.body;
-    console.log(favorites)
     if (!favorites) {
       return res.status(400).json({message: "Bad Request!"});
     }
