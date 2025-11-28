@@ -9,10 +9,10 @@ interface Forecast {
 function TodayForecast({weatherData, symbol}: Forecast) {
     const hour = new Date().getHours()
     if (!weatherData) return <div className="animate-pulse">
-        <h2 className="text-2xl font-semibold text-center mb-2 py-2"><div className="w-full h-[1em] bg-zinc-500 rounding"></div></h2>
+        <h2 className="text-2xl font-semibold text-center mb-2 py-2"><span className="block w-full h-[1em] bg-zinc-500 rounding"></span></h2>
         <div className="flex">
-            {[0,1,2,3,4].map((hour: any) => {
-                return <WeatherBox symbol={symbol} key={hour.time} weatherData={null}></WeatherBox>
+            {[0,1,2,3,4].map((idx: number) => {
+                return <WeatherBox symbol={symbol} key={idx} weatherData={null}></WeatherBox>
             })}
         </div>
     </div>
