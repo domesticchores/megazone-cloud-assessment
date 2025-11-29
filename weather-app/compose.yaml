@@ -1,0 +1,23 @@
+services:
+  server:
+    build:
+      context: ./backend
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000:3000
+
+  web:
+    build: ./frontend
+    ports:
+      - "8080:8080"
+    volumes:
+     - ./frontend:/client
+     - node_modules:/client/node_modules
+    env_file:
+      - ./frontend/.env
+    stdin_open: true
+    tty: true
+
+volumes:
+  node_modules:

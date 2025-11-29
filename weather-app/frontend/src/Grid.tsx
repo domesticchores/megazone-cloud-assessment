@@ -19,28 +19,28 @@ interface weatherVariables {
     setSymbol: Function
 }
 
-interface formattedData {
-    name: any,
-    code: any,
-    is_day: any,
-    temp_c: number,
-    temp_f: number,
-    feelslike_c: number,
-    feelslike_f: number,
-    uv: any,
-    speed: number,
-    direction: any,
-    percentage: any,
-    symbol: string,
-    forecast: any[],
-    tomorrow: {
-        code: any,
-        maxtemp_c: any,
-        maxtemp_f: any,
-        mintemp_c: any,
-        mintemp_f: any,
-    }
-}
+// interface formattedData {
+//     name: any,
+//     code: any,
+//     is_day: any,
+//     temp_c: number,
+//     temp_f: number,
+//     feelslike_c: number,
+//     feelslike_f: number,
+//     uv: any,
+//     speed: number,
+//     direction: any,
+//     percentage: any,
+//     symbol: string,
+//     forecast: any[],
+//     tomorrow: {
+//         code: any,
+//         maxtemp_c: any,
+//         maxtemp_f: any,
+//         mintemp_c: any,
+//         mintemp_f: any,
+//     }
+// }
 
 function Grid(varData: weatherVariables) {
 
@@ -52,6 +52,7 @@ function Grid(varData: weatherVariables) {
   const [favData, setFavData] = useState<any>(null);
 
   useEffect(() => {
+    setData(null);
     getCurrentData(city).then((res) => {
         console.log(res);
         setData(res);
@@ -59,6 +60,7 @@ function Grid(varData: weatherVariables) {
   }, [city]);
 
   useEffect(() => {
+    setFavData(null);
     getBulkData(favorites).then((res) => {
         console.log(res.bulk);
         setFavData(res.bulk);
