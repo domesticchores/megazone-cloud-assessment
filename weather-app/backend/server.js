@@ -9,7 +9,7 @@ const headers = {
 }
 
 app.get('/', (req, res) => {
-  res.send('Hello World!')
+  res.send('Weather Backend Running!')
 })
 
 app.use(express.json())
@@ -41,7 +41,6 @@ app.post('/main', async (req, res) => {
 app.post('/favorites', async (req, res) => {
   try {
     const favorites = req.body;
-    console.log(favorites)
     if (!favorites) {
       return res.status(400).json({message: "Bad Request!"});
     }

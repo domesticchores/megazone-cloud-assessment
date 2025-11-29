@@ -1,18 +1,20 @@
 import mockForecast from "../assets/mockForecast.json"
 import mockBulk from "../assets/mockBulk.json"
 
+const API = import.meta.env.VITE_API || "http://localhost:3000"
+
 const headers = {
           'Content-Type': 'application/json'
 }
 
 export async function getCurrentData(city: string) {
-    const res = await fetch(import.meta.env.VITE_API+"/main",{
+    const res = await fetch(API+"/main",{
         method: 'POST',
         headers: headers,
         body: JSON.stringify({city:city})
     });
     if (!res.ok) {
-        console.error("could not get data");
+        console.error("could not get data:", res.json());
         return mockForecast;
     }
 
@@ -29,13 +31,13 @@ export async function getBulkData(cities: string[]) {
         ]
     }
 
-    const res = await fetch(import.meta.env.VITE_API+"/favorites",{
+    const res = await fetch(API+"/favorites",{
         method: 'POST',
         headers: headers,
         body: JSON.stringify(formattedCities)
     });
     if (!res.ok) {
-        console.error("could not get data");
+        console.error("could not get data: ", res.json());
         return mockBulk;
     }
 
