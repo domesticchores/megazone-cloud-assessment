@@ -54,16 +54,20 @@ function Grid(varData: weatherVariables) {
   useEffect(() => {
     setData(null);
     getCurrentData(city).then((res) => {
-        console.log(res);
         setData(res);
+        localStorage.setItem("city",city)
+    }).catch(()=>{
+        localStorage.removeItem("city");
     });
   }, [city]);
 
   useEffect(() => {
     setFavData(null);
     getBulkData(favorites).then((res) => {
-        console.log(res.bulk);
         setFavData(res.bulk);
+        localStorage.setItem("favorites",JSON.stringify(favorites))
+    }).catch(()=>{
+        localStorage.removeItem("favorites");
     });
   }, [favorites]);
 

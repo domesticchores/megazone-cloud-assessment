@@ -41,6 +41,7 @@ app.post('/main', async (req, res) => {
 app.post('/favorites', async (req, res) => {
   try {
     const favorites = req.body;
+    console.log(favorites)
     if (!favorites) {
       return res.status(400).json({message: "Bad Request!"});
     }

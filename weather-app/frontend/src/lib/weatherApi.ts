@@ -15,7 +15,6 @@ export async function getCurrentData(city: string) {
         console.error("could not get data");
         return mockForecast;
     }
-    // console.log(res);
 
     return res.json();
 }
@@ -39,7 +38,6 @@ export async function getBulkData(cities: string[]) {
         console.error("could not get data");
         return mockBulk;
     }
-    console.log(res);
 
     return res.json();
 }

@@ -18,7 +18,6 @@ function Modal({isOpen,toggle,data}: {isOpen: boolean, toggle: Function, data: w
 
     function handleSubmit(e: any): void {
         e.preventDefault();
-        console.log(localFavorites.filter((item)=>item.trim().length > 0));
         data.setCity(e.target.city.value);
         data.setFavorites(localFavorites.filter((item)=>item.trim().length > 0));
         data.setSymbol(e.target.symbol.value)
