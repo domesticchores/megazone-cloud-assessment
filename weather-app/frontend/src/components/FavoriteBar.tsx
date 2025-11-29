@@ -8,7 +8,7 @@ interface FavoriteProps {
 
 function FavoriteBar({dataArr, symbol}: FavoriteProps) {
     if (!dataArr) return <div></div>
-    const [isOpen, setOpen] = useState<boolean>(true)
+    const [isOpen, setOpen] = useState<boolean>(false)
 
     return <div className="absolute h-screen w-fit inset-0 flex z-20">
     <div className={`bg-favorites h-full left-0 top-0 z-30 pt-12 transition-all ${isOpen ? "ml-0" : "-ml-38 lg:-ml-47"}`}>
