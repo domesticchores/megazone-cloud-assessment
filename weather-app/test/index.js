@@ -1,5 +1,6 @@
 const { Builder, Browser, By, Key, until } = require('selenium-webdriver')
 const assert = require('assert')
+require('dotenv').config()
 
 async function runTests() {
   // set the driver depending on if running locally or running off CI

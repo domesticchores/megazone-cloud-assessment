@@ -44,10 +44,15 @@ jobs:
           echo "WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }}" > .env
           echo "CORS_ALLOW=http://localhost:8080" >> .env
           echo "PORT=3000" >> .env
-          echo "IS_CI=true" >> .env
           cd ../frontend
           echo "VITE_API=http://localhost:3000" > .env
+          cd ../test
+          echo "IS_CI=true" > .env
           cd ../
+
+      - name: Clean up stray docker containers
+        run: |
+          docker ps -a -q | xargs docker rm -f
 
       - name: Run docker
         run: |
@@ -81,7 +86,3 @@ jobs:
         run: |
           cd weather-app
           docker compose down
-      
-      - name: Clean up stray docker containers
-        run: |
-          docker ps -a -q | xargs docker rm -f
