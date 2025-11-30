@@ -11,7 +11,7 @@ function UVIndex({uv}: {uv: number}) {
 
         <div id="uv_index" className="m-auto text-center relative z-10">
             <span className="material-symbols-rounded text-[2em]! md:text-[5em]! lg:text-[7em]! m-auto">sunny</span>
-            <h2 className="text-xl font-bold">UV Index {uv}</h2>
+            <h2 id="uv_text" className="text-xl font-bold">UV Index {uv}</h2>
         </div>
     </>
 }

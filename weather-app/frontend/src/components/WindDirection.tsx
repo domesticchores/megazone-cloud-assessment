@@ -12,7 +12,7 @@ function WindDirection({speed,direction}: {speed: number, direction: string}) {
 
         <div id="wind_direction" className="m-auto text-center relative z-10">
             <span className="material-symbols-rounded text-[2em]! md:text-[5em]! lg:text-[7em]! m-auto">air</span>
-            <h2 className="text-xl font-bold">{speed} MPH {direction}</h2>
+            <h2 id="wd_text" className="text-xl font-bold">{speed} MPH {direction}</h2>
         </div>
     </>
 }
