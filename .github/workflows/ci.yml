@@ -40,7 +40,7 @@ jobs:
       
       - name: Load environment variables
         run: |
-          cd backend
+          cd weather-app/backend
           echo "WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }}" > .env
           echo "CORS_ALLOW=http://localhost:8080" >> .env
           echo "PORT=3000" >> .env
