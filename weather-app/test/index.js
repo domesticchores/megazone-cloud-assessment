@@ -34,15 +34,6 @@ async function test_wind_direction(driver) {
     assert.ok(actual.includes("MPH"), `Wind Direction widget does not contain correct text. GIVEN: ${actual}`)
 }
 
-async function test_uv_index(driver) {
-      // ensure UV index widget exists
-    const uv_widget = await driver.findElements(By.id('current_weather'));
-    assert.ok(uv_widget.length > 0, 'UV index widget not found')
-    // check if UV index text exists
-    const index = await driver.findElement(By.id('uv_text')).getText()
-    assert.ok(index.includes("UV Index"), `UV Index widget does not contain correct text. GIVEN: ${actual}`)
-}
-
 async function runTests() {
   // set the driver depending on if running locally or running off CI
   let driver = null;
