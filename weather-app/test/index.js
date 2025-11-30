@@ -2,6 +2,10 @@ const { Builder, Browser, By, Key, until } = require('selenium-webdriver')
 const assert = require('assert')
 require('dotenv').config()
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function runTests() {
   // set the driver depending on if running locally or running off CI
   let driver = null;
@@ -25,16 +29,18 @@ async function runTests() {
     await driver.wait(until.titleIs('weather-app'), 5000)
     // wait until an element is loaded to proceed with tests
     await driver.wait(until.elementLocated(By.id('main_grid')), 5000)
-    // implicit timer to ensure data is loaded
-    await driver.manage().getTimeouts({explict:5000})
 
     // ======== CURRENT WEATHER ========
 
     // ensure current weather widget exists
     const cw_widget = await driver.findElements(By.id('current_weather'));
     assert.ok(cw_widget.length > 0, 'Current weather widget not found')
+    console.log(await driver.getPageSource())
+    // implicit timer to ensure data is loaded
+    await sleep(5000)
     // check location is correct
     const location = await driver.findElement(By.id('current_location')).getText()
+    console.log("loc",location)
     assert.ok(location === "Rochester", `Location does not match default data. GIVEN: ${location} EXPECTED: Rochester`)
 
     // ======== UV INDEX ========
