@@ -18,8 +18,8 @@ jobs:
         options: --privileged
         ports:
           - "4444:4444"
-      networks:
-        - weather-app-network
+        networks:
+          - weather-app-network
 
     steps:
       - name: Checkout code
