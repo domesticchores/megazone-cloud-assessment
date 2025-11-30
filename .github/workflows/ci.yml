@@ -18,6 +18,8 @@ jobs:
         options: --privileged
         ports:
           - "4444:4444"
+      networks:
+        - weather-app-network
 
     steps:
       - name: Checkout code
@@ -73,7 +75,6 @@ jobs:
         run: |
           echo "Waiting for Selenium to be ready..."
           until curl --silent --fail http://localhost:4444/wd/hub/status; do
-            echo "Waiting for Selenium WebDriver to be ready..."
             sleep 5
           done
           echo "Selenium ready"
@@ -87,3 +88,10 @@ jobs:
         run: |
           cd weather-app
           docker compose down
+    
+    networks:
+      - weather-app-network
+
+networks:
+  weather-app-network:
+    driver: bridge
