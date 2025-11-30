@@ -42,7 +42,7 @@ jobs:
         run: |
           cd weather-app/backend
           echo "WEATHER_API_KEY=${{ secrets.WEATHER_API_KEY }}" > .env
-          echo "CORS_ALLOW=http://localhost:8080" >> .env
+          echo "CORS_ALLOW=http://frontend:8080" >> .env
           echo "PORT=3000" >> .env
           cd ../frontend
           echo "VITE_API=http://localhost:3000" > .env
