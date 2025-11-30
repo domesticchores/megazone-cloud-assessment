@@ -7,7 +7,7 @@ interface WeatherProps {
 }
 
 function CurrentWeather({className, weatherData}: WeatherProps) {
-    if (!weatherData) return <div className="relative z-10 h-full w-full animate-pulse">
+    if (!weatherData) return <div id="current_weather" className="relative z-10 h-full w-full animate-pulse">
             <div className="w-full h-1/12 text-center relative">
                 <h1 className="text-2xl md:text-3xl"><span className="block w-full h-[1em] bg-zinc-500 rounding"></span></h1>
             </div>
@@ -29,7 +29,7 @@ function CurrentWeather({className, weatherData}: WeatherProps) {
         
         <Blur x={"left"} y={"bottom"} size={"lg"} color={weatherData.feelslike_f < 95 ? "blue" : "orange"}/>
 
-        <div className="relative z-10 h-full w-full">
+        <div id="current_weather" className="relative z-10 h-full w-full">
             <div className="w-full h-1/12 text-center relative">
                 <h1 className="text-2xl md:text-3xl">{weatherData.name}</h1>
             </div>

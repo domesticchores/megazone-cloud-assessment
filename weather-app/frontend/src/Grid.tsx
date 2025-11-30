@@ -106,10 +106,10 @@ function Grid(varData: weatherVariables) {
 
   return (
     // main container
-    <div className="bg-primary w-screen h-screen pt-12">
+    <div id="application" className="bg-primary w-screen h-screen pt-12">
         {/* grid container, with horizontal padding */}
         <FavoriteBar dataArr={favData} symbol={symbol}></FavoriteBar>
-        <div className="grid w-screen h-full grid-rows-3 md:grid-cols-5 sm:grid-cols-1 gap-4 max-w-6xl mx-auto py-8 px-4 z-10">
+        <div id="main_grid" className="grid w-screen h-full grid-rows-3 md:grid-cols-5 sm:grid-cols-1 gap-4 max-w-6xl mx-auto py-8 px-4 z-10">
 
             <Widget style={"lg"}>
                 <CurrentWeather weatherData={formattedCurrentData}></CurrentWeather>

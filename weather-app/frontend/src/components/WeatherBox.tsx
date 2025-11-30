@@ -7,7 +7,7 @@ interface WeatherProps {
 }
 
 function WeatherBox({className, weatherData, symbol}: WeatherProps) {
-    if (!weatherData) return <div className={`m-auto text-center relative z-10 ${className || ''}`}>
+    if (!weatherData) return <div className={`weather_box m-auto text-center relative z-10 ${className || ''}`}>
             <h2 className="text-md md:text-md lg:text-xl font-bold mb-1"><span className="block w-full h-[1em] bg-zinc-500 rounding"></span></h2>
             <span className="material-symbols-rounded text-[1em]! md:text-[2em]! lg:text-[4em]! m-auto text-zinc-500">sunny</span>
             <span className="block w-full h-[1em] bg-zinc-500 rounding"></span>

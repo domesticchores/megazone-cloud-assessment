@@ -15,12 +15,12 @@ function NavBar(data: weatherVariables) {
     const [isOpen, toggleModal] = useState<boolean>(false);
   return (
     <>
-      <nav className='fixed flex h-16 bg-header z-30 w-screen items-center px-8 md:px-20'>
+      <nav id="navbar" className='fixed flex h-16 bg-header z-30 w-screen items-center px-8 md:px-20'>
         <div className='h-fit flex gap-x-2'>
             <span className="material-symbols-rounded text-[2.5em]! m-auto">nest_farsight_weather</span>
             <h1 className='text-3xl font-bold'>Duumori</h1>
         </div>
-        <button onClick={()=>{toggleModal(true)}} className='flex ml-auto'>
+        <button id="settings_toggle" onClick={()=>{toggleModal(true)}} className='flex ml-auto'>
             <span className="material-symbols-rounded text-[2.5em]! m-auto hover:animate-spin hover:text-zinc-400">settings</span>
         </button>
       </nav>

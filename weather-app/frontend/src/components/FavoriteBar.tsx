@@ -7,10 +7,10 @@ interface FavoriteProps {
 }
 
 function FavoriteBar({dataArr, symbol}: FavoriteProps) {
-    if (!dataArr) return <div></div>
+    if (!dataArr) return <div id="favorite_bar"></div>
     const [isOpen, setOpen] = useState<boolean>(false)
 
-    return <div className="absolute h-screen w-fit inset-0 flex z-20">
+    return <div id="favorite_bar" className="absolute h-screen w-fit inset-0 flex z-20">
     <div className={`bg-favorites h-full left-0 top-0 z-30 pt-12 transition-all ${isOpen ? "ml-0" : "-ml-38 lg:-ml-47"}`}>
         <div className="w-full h-1/8 flex py-8 px-4 lg:px-8">
             <h1 className="text-3xl font-semibold text-center w-full">Favorites</h1>

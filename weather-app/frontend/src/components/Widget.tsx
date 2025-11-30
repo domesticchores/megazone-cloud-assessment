@@ -16,7 +16,7 @@ function Widget({children, style}: WidgetProps) {
     } else {
         classStyle = "p-2 col-span-1 flex"
     }
-    return <div className={`bg-widget h-full rounding relative overflow-hidden ${classStyle}`}>
+    return <div className={`widget bg-widget h-full rounding relative overflow-hidden ${classStyle}`}>
         <div className="absolute inset-0 border-3 w-full h-full brightness-[300] rounding border-zinc-300/25"></div>
         {children}
     </div>

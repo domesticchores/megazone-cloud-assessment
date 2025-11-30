@@ -39,7 +39,7 @@ function Modal({isOpen,toggle,data}: {isOpen: boolean, toggle: Function, data: w
 
     if (!isOpen) return <></>
     return <>
-        <div className="absolute w-screen h-screen inset-0 flex z-50 leading-8">
+        <div id="modal" className="absolute w-screen h-screen inset-0 flex z-50 leading-8">
             <div className="absolute w-screen h-screen inset-0 bg-black/50 z-10" onClick={()=>{toggle(false)}}></div>
             <div className="relative w-3/4 md:max-w-md lg:max-w-lg h-2/3 bg-modal rounding m-auto z-20 p-6 text-modal">
                 <div className="h-fit">
