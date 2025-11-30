@@ -10,10 +10,16 @@ async function runTests() {
   } else {
     driver = await new Builder().forBrowser(Browser.FIREFOX).build()
   }
+  // ensure driver is running
+  if (!driver) {
+      console.error("Failed to initialize WebDriver");
+      return;
+    }
+  
   // begin testing
   try {
     // ======== INITIALIZATION ========
-
+    console.log("Begin selenium testing")
     // access website
     await driver.get('localhost:8080')
     // ensure title is as expected
@@ -53,6 +59,9 @@ async function runTests() {
     let modal = await driver.findElements(By.id('modal'))
     assert.ok(modal.length > 0, 'Settings modal not found')
     
+  } catch (error) {
+    console.error("Error when running tests:", error.message);
+    console.error(error.stack);
   } finally {
     await driver.quit()
   }
