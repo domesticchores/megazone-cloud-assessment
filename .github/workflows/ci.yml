@@ -53,10 +53,24 @@ jobs:
         run: |
           cd weather-app
           docker compose up -d
+      
+      - name: Check active ports
+          run: |
+          echo "Port 4444 (Selenium):"
+          sudo lsof -i :4444
+          echo "Port 8080 (Vite):"
+          sudo lsof -i :8080
+          echo "Port 3000 (Express):"
+          sudo lsof -i :3000
 
       - name: Wait for services to be ready
         run: |
-          sleep 30
+          echo "Waiting for Selenium to be ready..."
+          until curl --silent --fail http://localhost:4444/wd/hub/status; do
+            echo "Waiting for Selenium WebDriver to be ready..."
+            sleep 5
+          done
+          echo "Selenium ready"
 
       - name: Run selenium tests
         run: |
