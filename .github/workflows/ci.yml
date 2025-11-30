@@ -48,6 +48,7 @@ jobs:
           echo "VITE_API=http://localhost:3000" > .env
           cd ../test
           echo "IS_CI=true" > .env
+          echo "FRONTEND=frontend:8080" >> .env
           cd ../
 
       - name: Clean up stray docker containers

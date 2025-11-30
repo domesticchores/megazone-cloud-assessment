@@ -21,7 +21,7 @@ async function runTests() {
     // ======== INITIALIZATION ========
     console.log("Begin selenium testing")
     // access website
-    await driver.get('localhost:8080')
+    await driver.get(process.env.FRONTEND)
     // ensure title is as expected
     await driver.wait(until.titleIs('weather-app'), 5000)
     // wait until an element is loaded to proceed with tests
