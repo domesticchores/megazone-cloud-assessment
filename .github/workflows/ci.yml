@@ -51,7 +51,7 @@ jobs:
       - name: Run docker
         run: |
           cd weather-app
-          docker-compose -f docker-compose.yml up -d
+          docker compose up -d
 
       - name: Wait for services to be ready
         run: |
