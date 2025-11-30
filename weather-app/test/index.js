@@ -6,7 +6,7 @@ async function runTests() {
   // set the driver depending on if running locally or running off CI
   let driver = null;
   if (process.env.IS_CI === "true") {
-    await new Builder().forBrowser(Browser.FIREFOX).usingServer("http://localhost:4444/wd/hub").build()
+    driver = await new Builder().forBrowser(Browser.FIREFOX).usingServer("http://localhost:4444/wd/hub").build()
   } else {
     driver = await new Builder().forBrowser(Browser.FIREFOX).build()
   }
