@@ -31,7 +31,7 @@ async function test_wind_direction(driver) {
     assert.ok(wd_widget.length > 0, 'Wind Direction widget not found')
     // check if Wind Direction text exists
     const actual = await driver.findElement(By.id('wd_text')).getText()
-    assert.ok(actual.includes("MPH"), `Wind Direction widget does not contain correct text. GIVEN: ${index}`)
+    assert.ok(actual.includes("MPH"), `Wind Direction widget does not contain correct text. GIVEN: ${actual}`)
 }
 
 async function test_uv_index(driver) {
@@ -40,7 +40,7 @@ async function test_uv_index(driver) {
     assert.ok(uv_widget.length > 0, 'UV index widget not found')
     // check if UV index text exists
     const index = await driver.findElement(By.id('uv_text')).getText()
-    assert.ok(index.includes("UV Index"), `UV Index widget does not contain correct text. GIVEN: ${index}`)
+    assert.ok(index.includes("UV Index"), `UV Index widget does not contain correct text. GIVEN: ${actual}`)
 }
 
 async function runTests() {
