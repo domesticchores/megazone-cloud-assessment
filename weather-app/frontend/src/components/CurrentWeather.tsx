@@ -9,7 +9,7 @@ interface WeatherProps {
 function CurrentWeather({className, weatherData}: WeatherProps) {
     if (!weatherData) return <div id="current_weather" className="relative z-10 h-full w-full animate-pulse">
             <div className="w-full h-1/12 text-center relative">
-                <h1 className="text-2xl md:text-3xl"><span className="block w-full h-[1em] bg-zinc-500 rounding"></span></h1>
+                <h1 id="current_location" className="text-2xl md:text-3xl"><span className="block w-full h-[1em] bg-zinc-500 rounding"></span></h1>
             </div>
             <div className={`w-full h-3/7 md:h-1/2 flex ${className || ''}`}>
                 <span className="material-symbols-rounded text-[6em]! md:text-[12em]! lg:text-[15em]! m-auto text-zinc-500">sunny</span>
@@ -31,7 +31,7 @@ function CurrentWeather({className, weatherData}: WeatherProps) {
 
         <div id="current_weather" className="relative z-10 h-full w-full">
             <div className="w-full h-1/12 text-center relative">
-                <h1 className="text-2xl md:text-3xl">{weatherData.name}</h1>
+                <h1 id="current_location" className="text-2xl md:text-3xl">{weatherData.name}</h1>
             </div>
             <div className={`w-full h-3/7 md:h-1/2 flex ${className || ''}`}>
                 <span className="material-symbols-rounded text-[6em]! md:text-[12em]! lg:text-[15em]! m-auto">{codeData.icon}</span>

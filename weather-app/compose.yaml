@@ -19,5 +19,10 @@ services:
     stdin_open: true
     tty: true
 
+  selenium:
+    image: selenium/standalone-firefox:latest
+    ports:
+      - "4444:4444"
+
 volumes:
   node_modules:
