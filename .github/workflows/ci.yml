@@ -50,6 +50,7 @@ jobs:
 
       - name: Run docker
         run: |
+          cd weather-app
           docker-compose -f docker-compose.yml up -d
 
       - name: Wait for services to be ready
@@ -58,7 +59,7 @@ jobs:
 
       - name: Run selenium tests
         run: |
-          cd test
+          cd weather-app/test
           node index.js
 
       - name: Shut down Docker containers
