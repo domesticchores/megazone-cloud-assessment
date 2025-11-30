@@ -55,7 +55,7 @@ jobs:
           docker compose up -d
       
       - name: Check active ports
-          run: |
+        run: |
           echo "Port 4444 (Selenium):"
           sudo lsof -i :4444
           echo "Port 8080 (Vite):"
