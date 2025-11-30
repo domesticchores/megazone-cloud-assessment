@@ -26,7 +26,7 @@ async function runTests() {
     // wait until an element is loaded to proceed with tests
     await driver.wait(until.elementLocated(By.id('main_grid')), 5000)
     // implicit timer to ensure data is loaded
-    await driver.manage().getTimeouts({implicit:5000})
+    await driver.manage().getTimeouts({explict:5000})
 
     // ======== CURRENT WEATHER ========
 
