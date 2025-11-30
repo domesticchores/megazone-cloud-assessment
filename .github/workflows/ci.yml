@@ -45,7 +45,7 @@ jobs:
           echo "CORS_ALLOW=*" >> .env
           echo "PORT=3000" >> .env
           cd ../frontend
-          echo "VITE_API=http://localhost:3000" > .env
+          echo "VITE_API=http://backend:3000" > .env
           cd ../test
           echo "IS_CI=true" > .env
           echo "FRONTEND=frontend:8080" >> .env
