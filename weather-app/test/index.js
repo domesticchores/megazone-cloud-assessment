@@ -2,7 +2,14 @@ const { Builder, Browser, By, Key, until } = require('selenium-webdriver')
 const assert = require('assert')
 
 async function runTests() {
-  let driver = await new Builder().forBrowser(Browser.FIREFOX).build()
+  // set the driver depending on if running locally or running off CI
+  let driver = null;
+  if (process.env.IS_CI === "true") {
+    await new Builder().forBrowser(Browser.FIREFOX).usingServer("http://localhost:4444/wd/hub").build()
+  } else {
+    driver = await new Builder().forBrowser(Browser.FIREFOX).build()
+  }
+  // begin testing
   try {
     // ======== INITIALIZATION ========
 
