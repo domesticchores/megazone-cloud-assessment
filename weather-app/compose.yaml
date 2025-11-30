@@ -1,5 +1,5 @@
 services:
-  server:
+  backend:
     build:
       context: ./backend
     environment:
@@ -9,7 +9,7 @@ services:
     networks:
       - weather-app-network
 
-  web:
+  frontend:
     build: ./frontend
     ports:
       - "8080:8080"
