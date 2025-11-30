@@ -3,10 +3,10 @@ name: Duumori CI
 on:
   push:
     branches:
-      - main
+      - test-automation
   pull_request:
     branches:
-      - main
+      - test-automation
 
 jobs:
   selenium-tests:
