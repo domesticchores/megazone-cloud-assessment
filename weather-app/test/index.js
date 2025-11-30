@@ -10,10 +10,9 @@ async function runTests() {
   } else {
     driver = await new Builder().forBrowser(Browser.FIREFOX).build()
   }
-  // ensure driver is running
+  // ensure driver is running, error if not
   if (!driver) {
-      console.error("Failed to initialize WebDriver");
-      return;
+    throw new Error("Failed to initialize WebDriver")  
     }
   
   // begin testing
@@ -62,6 +61,7 @@ async function runTests() {
   } catch (error) {
     console.error("Error when running tests:", error.message);
     console.error(error.stack);
+    throw new Error(error.message)
   } finally {
     await driver.quit()
   }
